@@ -13,6 +13,7 @@
 		BF96C9D42B740BB200E5C576 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF96C9D22B740BB200E5C576 /* LaunchScreen.storyboard */; };
 		BF96C9DF2B740BB200E5C576 /* PlannerTDDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF96C9DE2B740BB200E5C576 /* PlannerTDDTests.swift */; };
 		BFB2C85B2B74BE710098A164 /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB2C85A2B74BE710098A164 /* Plan.swift */; };
+		BFB2C85D2B74BEAA0098A164 /* Listable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB2C85C2B74BEAA0098A164 /* Listable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		BF96C9DE2B740BB200E5C576 /* PlannerTDDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerTDDTests.swift; sourceTree = "<group>"; };
 		BF96C9E42B740BB200E5C576 /* PlannerTDDUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlannerTDDUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFB2C85A2B74BE710098A164 /* Plan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
+		BFB2C85C2B74BEAA0098A164 /* Listable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				BFB2C85A2B74BE710098A164 /* Plan.swift */,
+				BFB2C85C2B74BEAA0098A164 /* Listable.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF96C9C82B740BB100E5C576 /* AppDelegate.swift in Sources */,
+				BFB2C85D2B74BEAA0098A164 /* Listable.swift in Sources */,
 				BF96C9CA2B740BB100E5C576 /* SceneDelegate.swift in Sources */,
 				BFB2C85B2B74BE710098A164 /* Plan.swift in Sources */,
 			);
