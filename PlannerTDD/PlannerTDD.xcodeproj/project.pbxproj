@@ -16,6 +16,7 @@
 		BFB2C85D2B74BEAA0098A164 /* Listable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB2C85C2B74BEAA0098A164 /* Listable.swift */; };
 		BFB2C85F2B74BFBC0098A164 /* Planner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB2C85E2B74BFBC0098A164 /* Planner.swift */; };
 		BFB2C8642B75EACA0098A164 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB2C8632B75EACA0098A164 /* State.swift */; };
+		BFB2C86C2B75FBD40098A164 /* PlannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB2C86B2B75FBD40098A164 /* PlannerViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		BFB2C85C2B74BEAA0098A164 /* Listable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listable.swift; sourceTree = "<group>"; };
 		BFB2C85E2B74BFBC0098A164 /* Planner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planner.swift; sourceTree = "<group>"; };
 		BFB2C8632B75EACA0098A164 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		BFB2C86B2B75FBD40098A164 /* PlannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				BF96C9C92B740BB100E5C576 /* SceneDelegate.swift */,
 				BF96C9F72B740BB900E5C576 /* Resource */,
 				BFB2C8592B74BE640098A164 /* Domain */,
+				BFB2C86A2B75FBC00098A164 /* Presentation */,
 			);
 			path = PlannerTDD;
 			sourceTree = "<group>";
@@ -117,6 +120,14 @@
 				BFB2C85E2B74BFBC0098A164 /* Planner.swift */,
 			);
 			path = Domain;
+			sourceTree = "<group>";
+		};
+		BFB2C86A2B75FBC00098A164 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				BFB2C86B2B75FBD40098A164 /* PlannerViewModel.swift */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,6 +232,7 @@
 			files = (
 				BF96C9C82B740BB100E5C576 /* AppDelegate.swift in Sources */,
 				BFB2C85F2B74BFBC0098A164 /* Planner.swift in Sources */,
+				BFB2C86C2B75FBD40098A164 /* PlannerViewModel.swift in Sources */,
 				BFB2C85D2B74BEAA0098A164 /* Listable.swift in Sources */,
 				BF96C9CA2B740BB100E5C576 /* SceneDelegate.swift in Sources */,
 				BFB2C85B2B74BE710098A164 /* Plan.swift in Sources */,
