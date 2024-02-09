@@ -131,4 +131,72 @@ final class ListFeatureTests: XCTestCase {
         // then
         XCTAssertEqual(toDoCount, sut.fetchContents(of: .toDo).count)
     }
+    
+    func test_listHandler에전달된클로저는_movePlan으로인해planner가변경되면_호출된다() {
+        // given
+        let id = UUID()
+        let plan = Plan(
+            id: id,
+            title: String(),
+            deadline: Date(),
+            description: String(),
+            state: .toDo
+        )
+        var number = 0
+        sut = PlannerViewModel(planner: Planner(list: [plan]))
+        sut.listHandler = {
+            number += 1
+        }
+        
+        // when
+        sut.movePlan(ofID: id, to: .doing)
+        
+        // then
+        XCTAssertEqual(number, 1)
+    }
+    
+    func test_listHandler에전달된클로저는_deletePlan으로인해planner가변경되면_호출된다() {
+        // given
+        let id = UUID()
+        let plan = Plan(
+            id: id,
+            title: String(),
+            deadline: Date(),
+            description: String(),
+            state: .toDo
+        )
+        var number = 0
+        sut = PlannerViewModel(planner: Planner(list: [plan]))
+        sut.listHandler = {
+            number += 1
+        }
+        
+        // when
+        sut.deletePlan(ofID: id)
+        
+        // then
+        XCTAssertEqual(number, 1)
+    }
+    
+    func test_listHandler에전달된클로저는_deletePlan에없는id가전달되면_호출되지않는다() {
+        // given
+        let plan = Plan(
+            id: UUID(),
+            title: String(),
+            deadline: Date(),
+            description: String(),
+            state: .toDo
+        )
+        var number = 0
+        sut = PlannerViewModel(planner: Planner(list: [plan]))
+        sut.listHandler = {
+            number += 1
+        }
+        
+        // when
+        sut.deletePlan(ofID: UUID())
+        
+        // then
+        XCTAssertNotEqual(number, 1)
+    }
 }
