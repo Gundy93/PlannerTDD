@@ -9,12 +9,6 @@ import Foundation
 
 struct Plan: Identifiable, Equatable {
     
-    enum State {
-        case toDo
-        case doing
-        case done
-    }
-    
     let id: UUID
     var title: String
     var deadline: Date
