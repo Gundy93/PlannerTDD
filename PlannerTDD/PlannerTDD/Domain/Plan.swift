@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Plan: Identifiable {
+struct Plan: Identifiable, Equatable {
     
     enum State {
         case toDo
