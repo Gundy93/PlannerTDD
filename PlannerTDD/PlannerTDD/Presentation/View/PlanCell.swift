@@ -9,42 +9,23 @@ import UIKit
 
 final class PlanCell: UICollectionViewCell {
     
-    private let stackView: UIStackView = {
-        let stackView = UIStackView()
-        
-        stackView.axis = .vertical
-        stackView.spacing = 8
-        stackView.alignment = .fill
-        stackView.distribution = .fillProportionally
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return stackView
-    }()
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        
-        label.font = .preferredFont(forTextStyle: .headline)
-        
-        return label
-    }()
-    private let descriptionLabel: UILabel = {
-        let label = UILabel()
-        
-        label.font = .preferredFont(forTextStyle: .body)
-        label.numberOfLines = 3
-        label.textColor = .systemGray
-        label.setContentCompressionResistancePriority(.required,
-                                                      for: .vertical)
-        
-        return label
-    }()
-    private let deadlineLabel: UILabel = {
-        let label = UILabel()
-        
-        label.font = .preferredFont(forTextStyle: .callout)
-        
-        return label
-    }()
+    private let stackView = UIStackView(
+        axis: .vertical,
+        spacing: 8,
+        distribution: .fillProportionally,
+        translatesAutoresizingMaskIntoConstraints: false
+    )
+    private let titleLabel = UILabel(
+        font: .preferredFont(forTextStyle: .headline)
+    )
+    private let descriptionLabel = UILabel(
+        font: .preferredFont(forTextStyle: .body),
+        textColor: .systemGray,
+        numberOfLines: 3
+    )
+    private let deadlineLabel = UILabel(
+        font: .preferredFont(forTextStyle: .callout)
+    )
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -61,6 +42,10 @@ final class PlanCell: UICollectionViewCell {
     }
     
     private func configureViewHierarchy() {
+        descriptionLabel.setContentCompressionResistancePriority(
+            .required,
+            for: .vertical
+        )
         [titleLabel, descriptionLabel, deadlineLabel].forEach { stackView.addArrangedSubview($0) }
         contentView.addSubview(stackView)
     }

@@ -19,6 +19,8 @@
 		BFB2C86C2B75FBD40098A164 /* PlannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB2C86B2B75FBD40098A164 /* PlannerViewModel.swift */; };
 		BFB2C86F2B75FF790098A164 /* ListFeatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB2C86E2B75FF790098A164 /* ListFeatureTests.swift */; };
 		BFB2C8742B760A420098A164 /* PlanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB2C8732B760A420098A164 /* PlanCell.swift */; };
+		BFB2C8792B760CE70098A164 /* UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB2C8782B760CE70098A164 /* UIStackView.swift */; };
+		BFB2C87B2B760E970098A164 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB2C87A2B760E970098A164 /* UILabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		BFB2C86B2B75FBD40098A164 /* PlannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerViewModel.swift; sourceTree = "<group>"; };
 		BFB2C86E2B75FF790098A164 /* ListFeatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFeatureTests.swift; sourceTree = "<group>"; };
 		BFB2C8732B760A420098A164 /* PlanCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanCell.swift; sourceTree = "<group>"; };
+		BFB2C8782B760CE70098A164 /* UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackView.swift; sourceTree = "<group>"; };
+		BFB2C87A2B760E970098A164 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +95,7 @@
 				BF96C9C72B740BB100E5C576 /* AppDelegate.swift */,
 				BF96C9C92B740BB100E5C576 /* SceneDelegate.swift */,
 				BF96C9F72B740BB900E5C576 /* Resource */,
+				BFB2C8762B760C9D0098A164 /* Utility */,
 				BFB2C8592B74BE640098A164 /* Domain */,
 				BFB2C86A2B75FBC00098A164 /* Presentation */,
 			);
@@ -150,6 +155,23 @@
 				BFB2C8732B760A420098A164 /* PlanCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		BFB2C8762B760C9D0098A164 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				BFB2C8772B760CCE0098A164 /* Extension */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		BFB2C8772B760CCE0098A164 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				BFB2C8782B760CE70098A164 /* UIStackView.swift */,
+				BFB2C87A2B760E970098A164 /* UILabel.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,7 +274,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFB2C87B2B760E970098A164 /* UILabel.swift in Sources */,
 				BF96C9C82B740BB100E5C576 /* AppDelegate.swift in Sources */,
+				BFB2C8792B760CE70098A164 /* UIStackView.swift in Sources */,
 				BFB2C85F2B74BFBC0098A164 /* Planner.swift in Sources */,
 				BFB2C86C2B75FBD40098A164 /* PlannerViewModel.swift in Sources */,
 				BFB2C85D2B74BEAA0098A164 /* Listable.swift in Sources */,
