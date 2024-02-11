@@ -42,10 +42,6 @@ final class PlanCell: UICollectionViewCell {
     }
     
     private func configureViewHierarchy() {
-        descriptionLabel.setContentCompressionResistancePriority(
-            .required,
-            for: .vertical
-        )
         [titleLabel, descriptionLabel, deadlineLabel].forEach { stackView.addArrangedSubview($0) }
         contentView.addSubview(stackView)
     }

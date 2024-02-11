@@ -23,6 +23,8 @@
 		BFB2C87B2B760E970098A164 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB2C87A2B760E970098A164 /* UILabel.swift */; };
 		BFB2C87D2B7611CF0098A164 /* PlanListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB2C87C2B7611CF0098A164 /* PlanListViewController.swift */; };
 		BFB2C87F2B788BA90098A164 /* UICollectionViewCompositionalLayoutConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB2C87E2B788BA90098A164 /* UICollectionViewCompositionalLayoutConfiguration.swift */; };
+		BFB2C8812B78A4110098A164 /* PlanListTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB2C8802B78A4110098A164 /* PlanListTitleView.swift */; };
+		BFB2C8832B78AC740098A164 /* RoundedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB2C8822B78AC740098A164 /* RoundedLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		BFB2C87A2B760E970098A164 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		BFB2C87C2B7611CF0098A164 /* PlanListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanListViewController.swift; sourceTree = "<group>"; };
 		BFB2C87E2B788BA90098A164 /* UICollectionViewCompositionalLayoutConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewCompositionalLayoutConfiguration.swift; sourceTree = "<group>"; };
+		BFB2C8802B78A4110098A164 /* PlanListTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanListTitleView.swift; sourceTree = "<group>"; };
+		BFB2C8822B78AC740098A164 /* RoundedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +162,8 @@
 			children = (
 				BFB2C8732B760A420098A164 /* PlanCell.swift */,
 				BFB2C87C2B7611CF0098A164 /* PlanListViewController.swift */,
+				BFB2C8802B78A4110098A164 /* PlanListTitleView.swift */,
+				BFB2C8822B78AC740098A164 /* RoundedLabel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -291,7 +297,9 @@
 				BF96C9CA2B740BB100E5C576 /* SceneDelegate.swift in Sources */,
 				BFB2C85B2B74BE710098A164 /* Plan.swift in Sources */,
 				BFB2C87D2B7611CF0098A164 /* PlanListViewController.swift in Sources */,
+				BFB2C8812B78A4110098A164 /* PlanListTitleView.swift in Sources */,
 				BFB2C8642B75EACA0098A164 /* State.swift in Sources */,
+				BFB2C8832B78AC740098A164 /* RoundedLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,9 +14,10 @@ final class PlanListViewController: UIViewController {
     typealias Snapshot = NSDiffableDataSourceSnapshot<State, PlannerViewModel.Content>
     
     private let viewModel: PlannerViewModel
+    private let titleView = PlanListTitleView()
     private var collectionView: UICollectionView!
     private var dataSource: DataSource?
-    private var ids = [Int : [UUID]]()
+    private var currentIDs = [State : [UUID]]()
     
     init(viewModel: PlannerViewModel) {
         self.viewModel = viewModel
@@ -74,8 +75,8 @@ final class PlanListViewController: UIViewController {
         
         configureViewHierarchy()
         configureLayoutConstraint()
-        configureNavigationBar()
         configureDataSource()
+        configureNavigationBar()
         bindData()
     }
     
@@ -95,7 +96,7 @@ final class PlanListViewController: UIViewController {
     }
     
     private func configureNavigationBar() {
-        navigationItem.title = State(rawValue: 0)?.name
+        navigationItem.titleView = titleView
     }
     
     private func configureDataSource() {
@@ -123,12 +124,16 @@ final class PlanListViewController: UIViewController {
     private func configureSnapshot() {
         var snapshot = Snapshot()
         
+        currentIDs = [:]
         snapshot.appendSections(State.allCases)
         State.allCases.forEach {
+            let contents = viewModel.fetchContents(of: $0)
+            
             snapshot.appendItems(
-                viewModel.fetchContents(of: $0),
+                contents,
                 toSection: $0
             )
+            currentIDs[$0] = contents.map { $0.id }
         }
         dataSource?.apply(snapshot)
     }
@@ -146,13 +151,19 @@ extension PlanListViewController: UICollectionViewDelegate {
         let remainder = scrollView.contentOffset.x.truncatingRemainder(
             dividingBy: view.frame.width
         )
-        var section = Int(scrollView.contentOffset.x / view.frame.width)
+        var index = Int(scrollView.contentOffset.x / view.frame.width)
         
         if remainder > view.frame.width / 2,
-           section < State.allCases.count-1 {
-            section += 1
+           index < State.allCases.count-1 {
+            index += 1
         }
         
-        navigationItem.title = State(rawValue: section)?.name
+        let validStates = currentIDs.keys.filter { currentIDs[$0] != [] }.sorted() { $0.rawValue < $1.rawValue }
+        let state = validStates.count > index ? validStates[index] : State.allCases[0]
+        
+        titleView.setContents(
+            title: state.name,
+            count: currentIDs[state]?.count ?? 0
+        )
     }
 }
