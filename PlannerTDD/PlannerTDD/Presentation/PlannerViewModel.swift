@@ -113,7 +113,9 @@ final class PlannerViewModel {
         } else {
             edit(plan: plan)
         }
-        
+    }
+    
+    func deselectPlan() {
         current = nil
         detailHandler = nil
     }

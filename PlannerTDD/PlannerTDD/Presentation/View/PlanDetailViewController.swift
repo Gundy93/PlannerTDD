@@ -69,9 +69,16 @@ final class PlanDetailViewController: UIViewController {
         configureNavigationBar()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        viewModel.deselectPlan()
+    }
+    
     private func configureViewHierarchy() {
         [titleTextField, datePicker, descriptionTextView].forEach { stackView.addArrangedSubview($0) }
         view.addSubview(stackView)
+        view.backgroundColor = .systemBackground
     }
     
     private func configureLayoutConstraint() {
@@ -94,6 +101,7 @@ final class PlanDetailViewController: UIViewController {
                 deadline: self.datePicker.date,
                 description: self.descriptionTextView.text
             )
+            self.dismiss(animated: true)
         }
         editButton.primaryAction = UIAction { [weak self] _ in 
             guard let self else { return }

@@ -98,6 +98,12 @@ final class PlanListViewController: UIViewController {
     
     private func configureNavigationBar() {
         navigationItem.titleView = titleView
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "plus"),
+            primaryAction: UIAction { _ in 
+                self.presentDetailView()
+            }
+        )
     }
     
     private func configureDataSource() {
@@ -144,6 +150,16 @@ final class PlanListViewController: UIViewController {
             self.scrollViewDidScroll(self.collectionView)
         }
     }
+    
+    private func presentDetailView(isEditable: Bool = true) {
+        let detailViewController = PlanDetailViewController(viewModel: viewModel)
+        
+        viewModel.setEditable(isEditable)
+        present(
+            UINavigationController(rootViewController: detailViewController),
+            animated: true
+        )
+    }
 }
 
 // MARK: - UICollectionViewDelegate
@@ -167,6 +183,17 @@ extension PlanListViewController: UICollectionViewDelegate {
         titleView.setContents(
             title: state.name,
             count: currentIDs[rawValue]?.count ?? 0
+        )
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let id = currentIDs[indexPath.section, default: []][indexPath.item]
+        
+        viewModel.selectPlan(ofID: id)
+        presentDetailView(isEditable: false)
+        collectionView.deselectItem(
+            at: indexPath,
+            animated: true
         )
     }
 }
