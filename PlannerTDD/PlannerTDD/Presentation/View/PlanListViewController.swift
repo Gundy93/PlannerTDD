@@ -17,7 +17,7 @@ final class PlanListViewController: UIViewController {
     private let titleView = PlanListTitleView()
     private var collectionView: UICollectionView!
     private var dataSource: DataSource?
-    private var currentIDs = [State : [UUID]]()
+    private var currentIDs = [Int : [UUID]]()
     
     init(viewModel: PlannerViewModel) {
         self.viewModel = viewModel
@@ -78,6 +78,7 @@ final class PlanListViewController: UIViewController {
         configureDataSource()
         configureNavigationBar()
         bindData()
+        configureLongPressGestureRecognizer()
     }
     
     private func configureViewHierarchy() {
@@ -124,7 +125,6 @@ final class PlanListViewController: UIViewController {
     private func configureSnapshot() {
         var snapshot = Snapshot()
         
-        currentIDs = [:]
         snapshot.appendSections(State.allCases)
         State.allCases.forEach {
             let contents = viewModel.fetchContents(of: $0)
@@ -133,7 +133,7 @@ final class PlanListViewController: UIViewController {
                 contents,
                 toSection: $0
             )
-            currentIDs[$0] = contents.map { $0.id }
+            currentIDs[$0.rawValue] = contents.map { $0.id }
         }
         dataSource?.apply(snapshot)
     }
@@ -141,10 +141,12 @@ final class PlanListViewController: UIViewController {
     private func bindData() {
         viewModel.listHandler = {
             self.configureSnapshot()
+            self.scrollViewDidScroll(self.collectionView)
         }
     }
 }
 
+// MARK: - UICollectionViewDelegate
 extension PlanListViewController: UICollectionViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -158,12 +160,84 @@ extension PlanListViewController: UICollectionViewDelegate {
             index += 1
         }
         
-        let validStates = currentIDs.keys.filter { currentIDs[$0] != [] }.sorted() { $0.rawValue < $1.rawValue }
-        let state = validStates.count > index ? validStates[index] : State.allCases[0]
+        let keys = currentIDs.keys.filter { currentIDs[$0] != [] }.sorted()
+        let rawValue = keys.isEmpty ? 0 : keys[index] 
+        let state = State(rawValue: rawValue) ?? State.allCases[0]
         
         titleView.setContents(
             title: state.name,
-            count: currentIDs[state]?.count ?? 0
+            count: currentIDs[rawValue]?.count ?? 0
         )
+    }
+}
+
+// MARK: - UIGestureRecognizerDelegate
+extension PlanListViewController: UIGestureRecognizerDelegate {
+    
+    private func configureLongPressGestureRecognizer() {
+        let gestureRecognizer = UILongPressGestureRecognizer(
+            target: self,
+            action: #selector(didLongPress)
+        )
+        gestureRecognizer.minimumPressDuration = 0.5
+        gestureRecognizer.delegate = self
+        gestureRecognizer.delaysTouchesBegan = true
+        collectionView.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    @objc func didLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
+        let tappedPoint = gestureRecognizer.location(in: collectionView)
+        guard let indexPath = collectionView.indexPathForItem(at: tappedPoint) else { return }
+        
+        switch gestureRecognizer.state {
+        case .began:
+            presentActionSheet(indexPath: indexPath)
+        default:
+            return
+        }
+    }
+    
+    private func presentActionSheet(indexPath: IndexPath) {
+        let tappedState = State(rawValue: indexPath.section) ?? State.allCases[0]
+        let alertController = UIAlertController(
+            title: nil,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        let id = currentIDs[indexPath.section, default: []][indexPath.item]
+        
+        makeMoveActions(
+            for: id,
+            from: tappedState
+        ).forEach { alertController.addAction($0) }
+        alertController.addAction(makeDeleteAction(id: id))
+        alertController.addAction(.init(title: "Cancel", style: .cancel))
+        present(alertController, animated: true)
+    }
+    
+    private func makeMoveActions(for id: UUID, from state: State) -> [UIAlertAction] {
+        State.allCases.compactMap {
+            guard $0 != state else { return nil }
+            
+            return makeMoveAction(id: id, to: $0)
+        }
+    }
+    
+    private func makeMoveAction(id: UUID, to state: State) -> UIAlertAction {
+        UIAlertAction(
+            title: "Move To " + state.name,
+            style: .default
+        ) { [weak self] _ in
+            self?.viewModel.movePlan(ofID: id, to: state)
+        }
+    }
+    
+    private func makeDeleteAction(id: UUID) -> UIAlertAction {
+        UIAlertAction(
+            title: "Delete",
+            style: .destructive
+        ) { [weak self] _ in
+            self?.viewModel.deletePlan(ofID: id)
+        }
     }
 }
