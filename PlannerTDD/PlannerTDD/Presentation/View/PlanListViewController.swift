@@ -23,6 +23,7 @@ final class PlanListViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         configureCollectionView()
+        bindData()
     }
     
     @available(*, unavailable)
@@ -77,7 +78,6 @@ final class PlanListViewController: UIViewController {
         configureLayoutConstraint()
         configureDataSource()
         configureNavigationBar()
-        bindData()
         configureLongPressGestureRecognizer()
     }
     

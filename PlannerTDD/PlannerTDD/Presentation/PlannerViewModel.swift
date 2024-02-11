@@ -75,34 +75,31 @@ final class PlannerViewModel {
     // MARK: - DetailFeature
     private var current: Plan?
     private var isEditable = true {
-        didSet { detailHandler?() }
+        didSet { detailHandler?(isEditable) }
     }
-    var detailHandler: (() -> Void)?
+    var detailHandler: ((Bool) -> Void)?
     
     func selectPlan(ofID id: UUID) {
         current = planner.list.first(where: { $0.id == id })
         isEditable = false
     }
     
-    func setEditable() {
-        isEditable = true
+    func setEditable(_ isEditable: Bool) {
+        self.isEditable = isEditable
     }
     
-    func cancel() {
-        isEditable = false
-    }
-    
-    func fetchDetailContents() -> (state: State, title: String, deadline: Date, description: String) {
+    func fetchDetailContents() -> (String, String, Date, String) {
         let state = current?.state ?? State.allCases[0]
         let title = current?.title ?? String()
         let deadline = current?.deadline ?? Date()
         let description = current?.description ?? String()
         
-        return (state, title, deadline, description)
+        return (state.name, title, deadline, description)
     }
     
-    func savePlan(state: State, title: String, deadline: Date, description: String) {
+    func savePlan(title: String, deadline: Date, description: String) {
         let id = current?.id ?? UUID()
+        let state = current?.state ?? State.allCases[0]
         let plan = Plan(
             id: id,
             title: title,
