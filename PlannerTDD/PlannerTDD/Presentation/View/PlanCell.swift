@@ -9,6 +9,8 @@ import UIKit
 
 final class PlanCell: UICollectionViewCell {
     
+    static let reuseIdentifier: String = "PlanCell"
+    
     private let stackView = UIStackView(
         axis: .vertical,
         spacing: 8,
@@ -30,8 +32,6 @@ final class PlanCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        contentView.backgroundColor = .white
-        backgroundColor = .systemGray5
         configureViewHierarchy()
         configureLayoutConstraint()
     }
@@ -59,7 +59,7 @@ final class PlanCell: UICollectionViewCell {
         ])
     }
     
-    func configure(title: String, description: String, deadline: String, isOverdue: Bool = false) {
+    func configure(title: String, description: String, deadline: String, isOverdue: Bool) {
         setTexts(title: title, description: description, deadline: deadline)
         setDeadlineColor(isOverDue: isOverdue)
     }

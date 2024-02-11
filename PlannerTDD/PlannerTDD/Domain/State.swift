@@ -5,7 +5,7 @@
 //  Created by Gundy on 2/9/24.
 //
 
-enum State: Int {
+enum State: Int, CaseIterable {
     case toDo
     case doing
     case done

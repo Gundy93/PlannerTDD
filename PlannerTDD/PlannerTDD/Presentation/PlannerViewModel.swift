@@ -23,7 +23,14 @@ final class PlannerViewModel {
     
     // MARK: - ListFeature
     
-    typealias Content = (title: String, description: String, deadline: String, isOver: Bool, id: UUID)
+    struct Content: Hashable {
+        
+        let title: String
+        let description: String
+        let deadline: String
+        let isOverdue: Bool
+        let id: UUID
+    }
     
     private let dateFormatter: DateFormatter = {
         let formatter =  DateFormatter()
@@ -44,11 +51,13 @@ final class PlannerViewModel {
     }
     
     private func format(plan: Plan) -> Content {
-        (plan.title,
-         plan.description,
-         dateFormatter.string(from: plan.deadline),
-         Date(timeInterval: 86399, since: plan.deadline) < Date.now,
-         plan.id)
+        Content(
+            title: plan.title,
+            description: plan.description,
+            deadline: dateFormatter.string(from: plan.deadline),
+            isOverdue: Date(timeInterval: 86399, since: plan.deadline) < Date.now,
+            id: plan.id
+        )
     }
     
     func movePlan(ofID id: UUID, to state: State) {

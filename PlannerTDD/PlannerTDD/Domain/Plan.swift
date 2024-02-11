@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Plan: Identifiable, Equatable {
+struct Plan: Identifiable, Hashable {
     
     let id: UUID
     var title: String
