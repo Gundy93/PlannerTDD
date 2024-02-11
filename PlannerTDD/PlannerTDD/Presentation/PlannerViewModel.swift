@@ -10,19 +10,14 @@ import Foundation
 final class PlannerViewModel {
     
     private var planner: Planner {
-        didSet { plannerDidUpdate() }
+        didSet { listHandler?() }
     }
     
     init(planner: Planner) {
         self.planner = planner
     }
     
-    private func plannerDidUpdate() {
-        listHandler?()
-    }
-    
     // MARK: - ListFeature
-    
     struct Content: Hashable {
         
         let title: String
@@ -75,5 +70,58 @@ final class PlannerViewModel {
         guard let plan = planner.list.first(where: { $0.id == id }) else { return }
         
         planner.delete(plan)
+    }
+    
+    // MARK: - DetailFeature
+    private var current: Plan?
+    private var isEditable = true {
+        didSet { detailHandler?() }
+    }
+    var detailHandler: (() -> Void)?
+    
+    func selectPlan(ofID id: UUID) {
+        current = planner.list.first(where: { $0.id == id })
+        isEditable = false
+    }
+    
+    func setEditable() {
+        isEditable = true
+    }
+    
+    func cancel() {
+        isEditable = false
+    }
+    
+    func fetchDetailContents() -> (state: State, title: String, deadline: Date, description: String) {
+        let state = current?.state ?? State.allCases[0]
+        let title = current?.title ?? String()
+        let deadline = current?.deadline ?? Date()
+        let description = current?.description ?? String()
+        
+        return (state, title, deadline, description)
+    }
+    
+    func savePlan(state: State, title: String, deadline: Date, description: String) {
+        let id = current?.id ?? UUID()
+        let plan = Plan(
+            id: id,
+            title: title,
+            deadline: deadline,
+            description: description,
+            state: state
+        )
+        
+        if current == nil {
+            add(plan: plan)
+        } else {
+            edit(plan: plan)
+        }
+        
+        current = nil
+        detailHandler = nil
+    }
+    
+    private func add(plan: Plan) {
+        planner.add(plan)
     }
 }
