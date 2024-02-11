@@ -76,6 +76,7 @@ final class PlanListViewController: UIViewController {
         configureLayoutConstraint()
         configureNavigationBar()
         configureDataSource()
+        bindData()
     }
     
     private func configureViewHierarchy() {
@@ -130,6 +131,12 @@ final class PlanListViewController: UIViewController {
             )
         }
         dataSource?.apply(snapshot)
+    }
+    
+    private func bindData() {
+        viewModel.listHandler = {
+            self.configureSnapshot()
+        }
     }
 }
 
