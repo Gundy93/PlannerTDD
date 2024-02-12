@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
@@ -17,5 +17,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         window?.backgroundColor = .systemBackground
         window?.makeKeyAndVisible()
+        window?.rootViewController = UINavigationController(
+            rootViewController: PlanListViewController(
+                viewModel: .init(
+                    planner: .init(
+                        list: []
+                    )
+                )
+            )
+        )
     }
 }
