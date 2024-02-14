@@ -155,6 +155,28 @@ final class ListFeatureTests: XCTestCase {
         XCTAssertEqual(number, 1)
     }
     
+    
+    func test_listHandler에전달된클로저는_movePlan에없는id가전달되면_호출되지않는다() {
+        // given
+        let plan = Plan(
+            id: UUID(),
+            title: String(),
+            deadline: Date(),
+            description: String(),
+            state: .toDo
+        )
+        var number = 0
+        sut = PlannerViewModel(planner: Planner(list: [plan]))
+        sut.listHandler = {
+            number += 1
+        }
+        
+        // when
+        sut.movePlan(ofID: UUID(), to: .done)
+        
+        // then
+        XCTAssertNotEqual(number, 1)
+    }
     func test_listHandler에전달된클로저는_deletePlan으로인해planner가변경되면_호출된다() {
         // given
         let id = UUID()
