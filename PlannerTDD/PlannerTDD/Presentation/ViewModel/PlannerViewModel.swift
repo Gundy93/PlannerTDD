@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class PlannerViewModel {
+final class PlannerViewModel: ListViewModel, DetailViewModel {
     
     private var planner: Planner {
         didSet { listHandler?() }
@@ -18,15 +18,6 @@ final class PlannerViewModel {
     }
     
     // MARK: - ListFeature
-    struct Content: Hashable {
-        
-        let title: String
-        let description: String
-        let deadline: String
-        let isOverdue: Bool
-        let id: UUID
-    }
-    
     private let dateFormatter: DateFormatter = {
         let formatter =  DateFormatter()
         
@@ -81,7 +72,6 @@ final class PlannerViewModel {
     
     func selectPlan(ofID id: UUID) {
         current = planner.list.first(where: { $0.id == id })
-        isEditable = false
     }
     
     func setEditable(_ isEditable: Bool) {

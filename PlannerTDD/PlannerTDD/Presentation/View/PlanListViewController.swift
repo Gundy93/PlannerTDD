@@ -9,17 +9,17 @@ import UIKit
 
 final class PlanListViewController: UIViewController {
     
-    typealias CellRegistration = UICollectionView.CellRegistration<PlanCell, PlannerViewModel.Content>
-    typealias DataSource = UICollectionViewDiffableDataSource<State, PlannerViewModel.Content>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<State, PlannerViewModel.Content>
+    typealias CellRegistration = UICollectionView.CellRegistration<PlanCell, Content>
+    typealias DataSource = UICollectionViewDiffableDataSource<State, Content>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<State, Content>
     
-    private let viewModel: PlannerViewModel
+    private let viewModel: ListViewModel
     private let titleView = PlanListTitleView()
     private var collectionView: UICollectionView!
     private var dataSource: DataSource?
     private var currentIDs = [Int : [UUID]]()
     
-    init(viewModel: PlannerViewModel) {
+    init(viewModel: ListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         configureCollectionView()
@@ -117,7 +117,7 @@ final class PlanListViewController: UIViewController {
         }
         
         dataSource = DataSource(collectionView: collectionView) {
-            (collectionView: UICollectionView, indexPath: IndexPath, content: PlannerViewModel.Content) -> UICollectionViewCell? in
+            (collectionView: UICollectionView, indexPath: IndexPath, content: Content) -> UICollectionViewCell? in
             return collectionView.dequeueConfiguredReusableCell(
                 using: cellRegistration,
                 for: indexPath,
@@ -152,6 +152,8 @@ final class PlanListViewController: UIViewController {
     }
     
     private func presentDetailView(isEditable: Bool = true) {
+        guard let viewModel = viewModel as? DetailViewModel else { return }
+        
         let detailViewController = PlanDetailViewController(viewModel: viewModel)
         
         viewModel.setEditable(isEditable)

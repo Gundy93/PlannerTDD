@@ -19,7 +19,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         window?.rootViewController = UINavigationController(
             rootViewController: PlanListViewController(
-                viewModel: .init(
+                viewModel: PlannerViewModel.init(
                     planner: .init(
                         list: []
                     )

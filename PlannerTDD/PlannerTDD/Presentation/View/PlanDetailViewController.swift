@@ -9,7 +9,7 @@ import UIKit
 
 final class PlanDetailViewController: UIViewController {
     
-    private let viewModel: PlannerViewModel
+    private let viewModel: DetailViewModel // 전체 뷰모델이 필요한가? save랑 isEditable만 필요한데?
     private let stackView = UIStackView(
         axis: .vertical,
         spacing: 16,
@@ -30,7 +30,7 @@ final class PlanDetailViewController: UIViewController {
     private let editButton = UIBarButtonItem(systemItem: .edit)
     private let cancelButton = UIBarButtonItem(systemItem: .cancel)
     
-    init(viewModel: PlannerViewModel) {
+    init(viewModel: DetailViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         setContents()
@@ -120,4 +120,3 @@ final class PlanDetailViewController: UIViewController {
         navigationItem.rightBarButtonItem = doneButton
     }
 }
-

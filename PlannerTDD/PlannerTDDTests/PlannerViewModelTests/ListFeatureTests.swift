@@ -10,7 +10,7 @@ import XCTest
 
 final class ListFeatureTests: XCTestCase {
     
-    private var sut: PlannerViewModel!
+    private var sut: ListViewModel!
 
     override func setUpWithError() throws {
         sut = PlannerViewModel(planner: Planner(list: []))
