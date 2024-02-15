@@ -9,7 +9,7 @@ import UIKit
 
 final class PlanDetailViewController: UIViewController {
     
-    private let viewModel: DetailViewModel // 전체 뷰모델이 필요한가? save랑 isEditable만 필요한데?
+    private let viewModel: DetailViewModel
     private let stackView = UIStackView(
         axis: .vertical,
         spacing: 16,
